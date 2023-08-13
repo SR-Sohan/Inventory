@@ -10,6 +10,35 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    public function LoginPage(){
+        return view("auth.loginPage");
+    }
+
+    public function RegisterPage(){
+        return view("auth.registerPage");
+    }
+
+    public function ForgotPage(){
+        return view("auth.forgotPage");
+    }
+
+    public function OTPPage(){
+        return view("auth.otpPage");
+    }
+    public function ResetPage(){
+        return view("auth.resetPage");
+    }
+
+
+
+
+
+
+
+
+
+
     public function UserRegistraion(Request $request){
 
         try {

@@ -1,18 +1,20 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\UserController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-Route::post("user-registraion",[UserController::class,'UserRegistraion']);
+// Page Routes 
+Route::get("/login",[UserController::class,"LoginPage"]);
+Route::get("/register",[UserController::class,"RegisterPage"]);
+Route::get("/forgot-password",[UserController::class,"ForgotPage"]);
+Route::get("/otp",[UserController::class,"OTPPage"]);
+Route::get("/reset-password",[UserController::class,"ResetPage"]);
+Route::get("/dashboard",[DashboardController::class,"page"]);
+
+
+
+// Registration web api
+Route::post("user-registration",[UserController::class,'UserRegistraion']);
 Route::post("user-login",[UserController::class,'UserLogin']);
