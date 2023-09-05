@@ -26,3 +26,6 @@ Route::prefix("/dashboard")->group(function(){
 // Registration web api
 Route::post("user-registration",[UserController::class,'UserRegistraion']);
 Route::post("user-login",[UserController::class,'UserLogin']);
+Route::post("send-otp",[UserController::class,'SendOTPCode']);
+Route::post("verify-otp",[UserController::class,'VerifyOtp']);
+Route::post("reset-password",[UserController::class,'ResetPassword'])->middleware("tokenVerify");
