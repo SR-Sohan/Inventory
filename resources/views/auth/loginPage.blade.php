@@ -44,7 +44,10 @@
                 hideLoader();
 
                 if(res.status == 200 && res.data["status"] == "Success"){
-                    window.location.href = "/dashboard"
+                    successToast("Login Successfully")
+                    setTimeout(() => {
+                        window.location.href = "/dashboard"
+                    }, 1000);
                 }else{
                     errorToast(res.data["message"])
                 }

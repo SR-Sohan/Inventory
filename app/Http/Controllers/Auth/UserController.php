@@ -118,10 +118,10 @@ class UserController extends Controller
             $token = JWTToken::CreateJwt($email);
 
             return response()->json([
-                "status" => "Success",
+                "status" => "success",
                 "message" => "OTP Verify Successful",
-                "token" => $token
-            ]);
+              
+            ])->cookie("token",$token);
 
 
         }else{
@@ -140,9 +140,9 @@ class UserController extends Controller
 
             User::where("email","=",$email)->update(["password"=> $password]);
             return response()->json([
-                "status" => "Success",
+                "status" => "success",
                 "message" => "Password Change Successful",
-            ]);
+            ],200);
         } catch (\Throwable $th) {
             return response()->json([
                 "status" => "Failed",

@@ -9,10 +9,35 @@
                         <label for="email">Email </label>
                         <input class="form-control" type="email" name="email" id="email">
                     </div>
-                    <button id="subBtn" class="btn btn-outline-primary w-100">Send OTP</button>
+                    <button onclick="sendOTP()" type="button" id="subBtn" class="btn btn-outline-primary w-100">Send OTP</button>
                    
                 </form>
             </div>
         </div>
     </div>
+    <script>
+        async function sendOTP(){
+            let email = $("#email").val()
+
+            if(email.length === 0){
+                errorToast("Please enter email")
+            }else{
+                showLoader();
+                let res = await axios.post("/send-otp",{
+                    "email" : email
+                })
+                hideLoader();
+
+                if(res.status === 200 && res.data['status'] === "success"){
+                    successToast(res.data["message"])
+                    sessionStorage.setItem('email', email);
+                    setTimeout(() => {
+                        window.location.href = "/otp"
+                    }, 1000);
+                }else{
+                    errorToast(res.data["message"])
+                }
+            }
+        }
+    </script>
 @endsection
