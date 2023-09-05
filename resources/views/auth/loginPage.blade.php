@@ -22,4 +22,9 @@
             </div>
         </div>
     </div>
+    <script>
+        // showLoader();
+        // successToast("Login")
+        // errorToast("login")
+    </script>
 @endsection
