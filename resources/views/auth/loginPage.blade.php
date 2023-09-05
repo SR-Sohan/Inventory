@@ -14,7 +14,7 @@
                         <input class="form-control" type="password" name="password" id="password">
                     </div>
                     <p class="text-end"><a href="{{url("/forgot-password")}}">Forgot Password</a></p>
-                    <button id="subBtn" class="btn btn-outline-primary w-100">Login</button>
+                    <button onclick="onLogin()" id="subBtn" type="button" class="btn btn-outline-primary w-100">Login</button>
                     <div class="mt-3 text-center">
                         <p>Don't do you have account?<a href="{{url("/register")}}">Create Account</a></p>
                     </div>
@@ -23,8 +23,32 @@
         </div>
     </div>
     <script>
-        // showLoader();
+        //  showLoader();
         // successToast("Login")
         // errorToast("login")
+
+        async function  onLogin() {
+            let email = $("#email").val();
+            let password = $("#password").val();
+
+            if(email.length == 0){
+                errorToast("Email Is Required")
+            }else if(password.length < 5){
+                errorToast("Password must be 6 character")
+            }else{
+                showLoader();
+                let res = await axios.post("/user-login",{
+                    "email": email,
+                    "password": password
+                })
+                hideLoader();
+
+                if(res.status == 200 && res.data["status"] == "Success"){
+                    window.location.href = "/dashboard"
+                }else{
+                    errorToast(res.data["message"])
+                }
+            }
+        }
     </script>
 @endsection

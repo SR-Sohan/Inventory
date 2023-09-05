@@ -71,8 +71,7 @@ class UserController extends Controller
             return response()->json([
                 "status" => "Success",
                 "message" => "User Login Successful",
-                "token" => $token
-            ]);
+            ])->cookie("token", $token);
             
         }else{
             return response()->json([
