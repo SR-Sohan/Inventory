@@ -71,7 +71,7 @@ class UserController extends Controller
             return response()->json([
                 "status" => "Success",
                 "message" => "User Login Successful",
-            ])->cookie("token", $token);
+            ])->cookie("token", $token,60*24*30);
             
         }else{
             return response()->json([
@@ -151,5 +151,9 @@ class UserController extends Controller
         }
 
        
+    }
+
+    public function UserLogOut(){
+        return redirect("/login")->cookie("token",'',-1);
     }
 }
