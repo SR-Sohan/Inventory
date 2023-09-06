@@ -31,6 +31,9 @@ class UserController extends Controller
     public function ResetPage(){
         return view("auth.resetPage");
     }
+    public function profilePage(){
+        return view("admin.pages.profile");
+    }
 
 
 
@@ -63,10 +66,11 @@ class UserController extends Controller
     public function UserLogin(Request $request){
         $user = User::where("email","=",$request->input("email"))
                     ->where("password","=",$request->input("password"))
-                    ->count();
+                    ->select("id")->first();
         
-        if($user == 1){
-            $token = JWTToken::CreateJwt($request->input("email"));
+        if($user !== null){
+
+            $token = JWTToken::CreateJwt($request->input("email"),$user->id);
 
             return response()->json([
                 "status" => "Success",
@@ -109,13 +113,13 @@ class UserController extends Controller
         $email = $request->input("email");
         $otp = $request->input("otp");
 
-        $user = User::where("email" , "=", $email)->where("otp" , "=",$otp)->count();
+        $user = User::where("email" , "=", $email)->where("otp" , "=",$otp)->select("id")->first();
 
-        if($user == 1){
+        if($user !== null){
             // Update Otp
             User::where("email","=",$email)->update(["otp" => '0']);
 
-            $token = JWTToken::CreateJwt($email);
+            $token = JWTToken::CreateJwt($email,$user->id);
 
             return response()->json([
                 "status" => "success",
@@ -155,5 +159,48 @@ class UserController extends Controller
 
     public function UserLogOut(){
         return redirect("/login")->cookie("token",'',-1);
+    }
+
+    public function UserProfile(Request $request){
+        $userID = $request->header("userID");
+
+        $user = User::find($userID);
+
+        if($user !== null){
+            return response()->json([
+                "status" => "success",
+                "message" => "User Get",
+                "data" => $user
+            ]);
+        }else{
+            return response()->json([
+                "status" => "Failed",
+                "message" => "User Unauthorized"
+            ]);
+        }
+    }
+
+    public function UpdateProfile(Request $request){
+
+        try {
+            $userID = $request->header("userID");
+            $first_name = $request->input("first_name");
+            $last_name = $request->input("last_name");
+            $mobile = $request->input("mobile");
+            $password = $request->input("password");    
+             User::where("id","=",$userID)->update(["first_name" => $first_name,"last_name" => $last_name,"mobile" => $mobile,"password"=> $password]);
+
+             return response()->json([
+                "status" => "success",
+                "message" => "Profile Update Successful",
+            ],200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                "status" => "Failed",
+                "message" => "User Can't Update"
+            ]);
+        }
+       
     }
 }
