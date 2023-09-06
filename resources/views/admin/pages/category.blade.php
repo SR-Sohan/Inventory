@@ -6,6 +6,6 @@
             <i class="fa-solid fa-plus"></i>
         </p>
     </div>
-
     @include('admin.components.category.create-category')
+    @include('admin.components.category.list-category')
 @endsection

@@ -12,15 +12,7 @@
             <div class="mb-3">
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name" class="form-control">
-            </div>
-            <div class="mb-3">
-                <img class="w-25" id="preview" src="{{asset("assets/img/default.jpg")}}" alt="">
-            </div>
-            <div class="mb-3">
-                <label for="image">Image</label>
-                <input oninput="preview.src = window.URL.createObjectURL(this.files[0])" type="file" name="image" id="image" class="form-control">
-            </div>
-            
+            </div>            
           </form>
         </div>
         <div class="modal-footer">

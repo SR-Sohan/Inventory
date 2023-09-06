@@ -19,12 +19,17 @@ Route::prefix("/dashboard")->middleware("tokenVerify")->group(function(){
     Route::get("",[DashboardController::class,"page"]);
     Route::get("category",[CategoryController::class,"page"]);
     Route::get("profile",[UserController::class,"profilePage"]);
+
+    // Category Api
+    Route::get("category-list",[CategoryController::class,"categoryList"]);
+    Route::post("category-create-update",[CategoryController::class,"categoryCreateUpdate"]);
+    Route::post("category-delete",[CategoryController::class,"categoryDelete"]);
 });
 
 
 
 
-//  web api
+// User web api
 Route::post("user-registration",[UserController::class,'UserRegistraion']);
 Route::post("user-login",[UserController::class,'UserLogin']);
 Route::post("send-otp",[UserController::class,'SendOTPCode']);
