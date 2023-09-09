@@ -8,6 +8,10 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Dashboard
                 </a>
+                <a class="nav-link" href="{{url("/dashboard/customer")}}">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                    Customers
+                </a>
                 <a class="nav-link" href="{{url("/dashboard/category")}}">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-paperclip"></i></div>
                     Category

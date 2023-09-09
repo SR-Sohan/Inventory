@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\UserController;
 use Illuminate\Support\Facades\Route;
@@ -17,14 +18,22 @@ Route::prefix("/dashboard")->middleware("tokenVerify")->group(function(){
 
     // Dashboard Page
     Route::get("",[DashboardController::class,"page"]);
+    Route::get("customer",[CustomerController::class,"page"]);
     Route::get("category",[CategoryController::class,"page"]);
     Route::get("profile",[UserController::class,"profilePage"]);
+
+    //Customer Api
+    Route::get("customer-list",[CustomerController::class,"customerList"]);
+    Route::get("customer-by-id/{id}",[CustomerController::class,"customerByID"]);
+    Route::post("customer-create-update",[CustomerController::class,"customerCreateUpdate"]);
+    Route::post("customer-delete",[CustomerController::class,"customerDelete"]);
 
     // Category Api
     Route::get("category-list",[CategoryController::class,"categoryList"]);
     Route::get("category-by-id/{id}",[CategoryController::class,"categoryByID"]);
     Route::post("category-create-update",[CategoryController::class,"categoryCreateUpdate"]);
     Route::post("category-delete",[CategoryController::class,"categoryDelete"]);
+
 });
 
 

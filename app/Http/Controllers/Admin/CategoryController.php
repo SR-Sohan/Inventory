@@ -32,8 +32,9 @@ class CategoryController extends Controller
 
     }
 
-    public function categoryByID($id){
-       return  Category::where("id","=",$id)->first();
+    public function categoryByID(Request $request,$id){
+        $userID = $request->header("userID");
+       return  Category::where("user_id","=",$userID)->where("id","=",$id)->first();
     }
 
 
