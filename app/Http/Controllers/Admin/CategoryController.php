@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function categoryList(Request $request){
 
         $userID = $request->header("userID");
-        $category = Category::where("user_id","=",$userID)->get();
+        $category = Category::where("user_id","=",$userID)->orderBy('id', 'DESC')->get();
 
         if($category){
             return response()->json([
@@ -30,6 +30,10 @@ class CategoryController extends Controller
             ]);
         }
 
+    }
+
+    public function categoryByID($id){
+       return  Category::where("id","=",$id)->first();
     }
 
 

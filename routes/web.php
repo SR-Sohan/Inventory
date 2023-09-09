@@ -22,6 +22,7 @@ Route::prefix("/dashboard")->middleware("tokenVerify")->group(function(){
 
     // Category Api
     Route::get("category-list",[CategoryController::class,"categoryList"]);
+    Route::get("category-by-id/{id}",[CategoryController::class,"categoryByID"]);
     Route::post("category-create-update",[CategoryController::class,"categoryCreateUpdate"]);
     Route::post("category-delete",[CategoryController::class,"categoryDelete"]);
 });

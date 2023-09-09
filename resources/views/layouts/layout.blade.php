@@ -7,11 +7,15 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Static Navigation - SB Admin</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <link href="{{asset("assets/css/styles.css")}}" rel="stylesheet" />
-        <script src="{{asset("https://use.fontawesome.com/releases/v6.3.0/js/all.js")}}" crossorigin="anonymous"></script>
+        
+        <link href="{{asset("assets/css/styles.css")}}" rel="stylesheet" />     
         <link rel="stylesheet" href="{{asset("assets/css/style.css")}}">
         <link rel="stylesheet" href="{{asset("assets/css/toastify.min.css")}}">
+        <link rel="stylesheet" href="{{asset("assets/css/dataTables.min.css")}}">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="{{asset("https://use.fontawesome.com/releases/v6.3.0/js/all.js")}}" crossorigin="anonymous"></script>
+        <script src="{{asset("assets/js/dataTables.min.js")}}"></script>
         <script src="{{asset("assets/js/axios.min.js")}}"></script>
         <script src="{{asset("assets/js/toastify.js")}}"></script>
         <script src="{{asset("assets/js/main.js")}}"></script>

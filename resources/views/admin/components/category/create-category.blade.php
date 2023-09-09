@@ -16,8 +16,8 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button onclick="formReset()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Add Category</button>
+          <button id="closeBtn" onclick="formReset()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="submitBtn" onclick="handleSubmit()" type="button" class="btn btn-primary">Add Category</button>
         </div>
       </div>
     </div>
@@ -27,7 +27,39 @@
 
     function formReset(){
         $("#form")[0].reset();
-        $("#preview").attr("src","{{asset("assets/img/default.jpg")}}")
+        $("#submitBtn").html("Add Category")
     }
+
+    async function handleSubmit(){
+
+        let name = $("#name").val()
+        let category_id = $("#cat_id").val()
+
+        if(name === ""){
+          errorToast("Please enter Category Name")
+        }else{
+          showLoader();
+          let res = await axios.post("/dashboard/category-create-update",{name: name,category_id: category_id})
+          hideLoader();
+
+          if(res.status === 200 && res.data['status'] === "success"){
+            document.getElementById("closeBtn").click()
+            formReset()
+            successToast(res.data['message'])
+            await getData();
+
+          }else{
+            document.getElementById("closeBtn").click()
+            formReset()
+            errorToast(res.data['message'])
+          }
+        }
+
+
+     
+    } 
+    
+
+
 
   </script>
