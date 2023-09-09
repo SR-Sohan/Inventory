@@ -7,14 +7,14 @@
         </div>
         <div class="modal-body">
           <form id="form">
-            <input type="hidden" name="customer_id" id="customer_id">
+            <input class="d-none" type="number" name="customer_id" id="customer_id">
             <div class="mb-3">
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name" class="form-control">
             </div>            
             <div class="mb-3">
                 <label for="mobile">Mobile</label>
-                <input type="number" name="Mobile" id="Mobile" class="form-control">
+                <input type="number" name="mobile" id="mobile" class="form-control">
             </div>            
           </form>
         </div>
@@ -25,3 +25,46 @@
       </div>
     </div>
   </div>
+
+  <script>
+
+    // Reset Form
+    function formReset(){
+        $("#form")[0].reset();
+        $("#submitBtn").html("Add Customer")
+    }
+
+    // Create Customer
+    async function handleSubmit(){
+      let customer_id = $("#customer_id").val();
+      let name = $("#name").val();
+      let mobile = $("#mobile").val();
+
+      if(name === ""){
+        errorToast("Customer Name is required")
+      }else if(mobile === ""){
+        errorToast("Please Enter correct mobile Number")
+      }else {
+
+        showLoader();
+        let res = await axios.post("/dashboard/customer-create-update",{
+          "customer_id" : customer_id,
+          "name" : name,
+          "mobile" : mobile
+        })
+        hideLoader();
+
+        if(res.status === 200 && res.data["status"] === "success"){
+          document.getElementById("closeBtn").click();         
+          successToast(res.data['message'])
+          await getData();
+          formReset();
+        }else{
+          errorToast(res.data["message"])
+        }
+
+      }
+
+    }
+
+  </script>

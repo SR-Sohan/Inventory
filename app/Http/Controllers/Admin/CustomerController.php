@@ -14,7 +14,7 @@ class CustomerController extends Controller
 
     public function customerList(Request $request){
         $userID = $request->header("userID");
-        $customers = Customer::where("user_id","=",$userID)->get();
+        $customers = Customer::where("user_id","=",$userID)->orderBy("id","desc")->get();
 
         if($customers){
             return response()->json([
