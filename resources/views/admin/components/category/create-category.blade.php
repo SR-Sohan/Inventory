@@ -43,6 +43,7 @@
           hideLoader();
 
           if(res.status === 200 && res.data['status'] === "success"){
+            $("#cat_id").val("")
             document.getElementById("closeBtn").click()
             formReset()
             successToast(res.data['message'])
