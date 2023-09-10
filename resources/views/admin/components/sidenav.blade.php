@@ -16,6 +16,18 @@
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-paperclip"></i></div>
                     Category
                 </a>
+                <a class="nav-link" href="{{url("/dashboard/product")}}">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+                    Product
+                </a>
+                <a class="nav-link" href="{{url("/dashboard/invoice")}}">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-receipt"></i></div>
+                    Invoice
+                </a>
+                <a class="nav-link" href="{{url("/dashboard/report")}}">
+                    <div class="sb-nav-link-icon"><i class="fa-regular fa-clipboard"></i></div>
+                    Report
+                </a>
                
             </div>
         </div>
