@@ -51,3 +51,88 @@
       </div>
     </div>
   </div>
+
+  <script>
+
+    // Category List
+    getCategory();
+    async function getCategory() {
+      
+      let res = await axios.get("/dashboard/category-list")
+      if(res.status === 200){
+        res.data["data"].forEach(item => {
+          let row = `<option value='${item.id}'>${item.name}</option>`
+
+          $("#category").append(row)
+
+        });
+      }
+    }
+
+    // form reset
+    function formReset(){
+      $("#form")[0].reset();
+      $("#submitBtn").html("Add Product")
+      $("#preview").attr('src', '{{ asset('assets/img/default.jpg') }}');
+    }
+
+    // Submit Form
+    async function handleSubmit(){
+      let product_id = $("#product_id").val();
+      let file_path = $("#file_path").val();
+      let category = $("#category").val();
+      let name = $("#name").val();
+      let price = $("#price").val();
+      let quantity = $("#quantity").val();
+      let unit = $("#unit").val();
+      let image = $('#image')[0].files[0]
+
+      if(category === "-1"){
+        errorToast("Category is required")
+      }else if(name === ""){
+        errorToast("Name is required")
+      }else if(price === ""){
+        errorToast("Price is required")
+      }else if(quantity === ""){
+        errorToast("Quantity is required")
+      }else if(unit === ""){
+        errorToast("Unit is required")
+      }else if(!image){
+        errorToast("Image is required")
+      }else{
+
+        let formData = new FormData();
+        formData.append("product_id",product_id)
+        formData.append("file_path",file_path)
+        formData.append("category_id",category)
+        formData.append("name",name)
+        formData.append("price",price)
+        formData.append("quantity",quantity)
+        formData.append("unit",unit)
+        formData.append("image",image)
+
+        let config = {
+                headers: {
+                    "Content-Type": "multipart/form-data", 
+                },
+            }
+          console.log(image);
+        showLoader();
+        let res = await axios.post("/dashboard/product-create-update",formData,config)
+        hideLoader();
+
+        if(res.status === 200 && res.data["status"] === "success"){
+          document.getElementById("closeBtn").click();
+          formReset();
+          await getData();
+          successToast(res.data["message"])
+        }else{
+          errorToast(res.data["message"])
+        }
+
+      }
+
+
+    }
+
+  </script>

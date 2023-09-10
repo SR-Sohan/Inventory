@@ -36,6 +36,11 @@ Route::prefix("/dashboard")->middleware("tokenVerify")->group(function(){
     Route::post("category-create-update",[CategoryController::class,"categoryCreateUpdate"]);
     Route::post("category-delete",[CategoryController::class,"categoryDelete"]);
 
+    // Product Api
+    Route::get("product-list",[ProductController::class,"productList"]);
+    Route::post("product-create-update",[ProductController::class,"productCreateUpdate"]);
+    Route::post("product-delete",[ProductController::class,"productDelete"]);
+
 });
 
 
