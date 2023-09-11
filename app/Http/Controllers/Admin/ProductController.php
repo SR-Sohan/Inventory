@@ -49,6 +49,44 @@ class ProductController extends Controller
 
         if($productID){
 
+            if($request->hasFile("image")){
+
+                // storage image
+                $updateImageName = time()."_".$userID.'.'.$image->getClientOriginalExtension();            
+                $image->storeAs('public/products', $updateImageName);
+
+                // Delete image
+                $imagePath = 'public/products/'.$filePath;        
+                Storage::delete($imagePath);
+
+                Product::where("user_id","=",$userID)->where("id","=",$productID)->update([
+                    "category_id" => $category_id,
+                    "name" => $name,
+                    "price" => $price,
+                    "quantity" => $quantity,
+                    "unit" => $unit,
+                    "image" => $updateImageName
+                ]);
+
+                return response()->json([
+                    "status" => "success",
+                    "message" => "Product Update Successfully",
+                ]);
+
+            }else{
+                Product::where("user_id","=",$userID)->where("id","=",$productID)->update([
+                    "category_id" => $category_id,
+                    "name" => $name,
+                    "price" => $price,
+                    "quantity" => $quantity,
+                    "unit" => $unit,
+                ]);
+                return response()->json([
+                    "status" => "success",
+                    "message" => "Product Update Successfully",
+                ]);
+            }
+
         }else{
        
             // Upload Image      
@@ -106,6 +144,11 @@ class ProductController extends Controller
                 "message" => "Product Can't delete",
             ]);
         }
+    }
+
+    public function productById(Request $request,$id){
+        $userID = $request->header("userID");
+        return Product::where("user_id","=",$userID)->where("id","=",$id)->first();
     }
 
 }

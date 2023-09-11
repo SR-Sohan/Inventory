@@ -38,6 +38,7 @@ Route::prefix("/dashboard")->middleware("tokenVerify")->group(function(){
 
     // Product Api
     Route::get("product-list",[ProductController::class,"productList"]);
+    Route::get("product-by-id/{id}",[ProductController::class,"productById"]);
     Route::post("product-create-update",[ProductController::class,"productCreateUpdate"]);
     Route::post("product-delete",[ProductController::class,"productDelete"]);
 

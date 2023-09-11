@@ -62,15 +62,44 @@
         }
     }
 
+    // Edit Item
+    $("#tableList").on("click",".editBtn",async function(){
+        let id = $(this).data("id")
+        let path = $(this).data("path")
+
+        showLoader();
+        let res = await axios.get(`/dashboard/product-by-id/${id}`)
+        hideLoader();
+        if(res.status === 200){
+            $("#product_id").val(res.data["id"])
+            $("#file_path").val(res.data["image"])
+            $("#category").val(res.data["category_id"])
+            $("#name").val(res.data["name"])
+            $("#price").val(res.data["price"])
+            $("#quantity").val(res.data["quantity"])
+            $("#unit").val(res.data["unit"])
+            $("#preview").attr("src", '{{ asset("storage/products") }}' + '/' + res.data['image']);
+            
+            $("#submitBtn").html("Update Product")
+
+            $("#contentModel").modal("show")
+        }else{
+            errorToast("Something is wrong")
+        }
+    })
+
     // Delete item
     $("#tableList").on("click",".deleteBtn",async function(){
         let id = $(this).data("id")
         let path = $(this).data("path")
-        
+        let tr = $(this).parent().parent();
+      
         if(confirm("Are you want to Delete?")){
+          
             let res = await axios.post("/dashboard/product-delete",{id: id,path: path})
 
             if(res.status === 200 && res.data['status'] === "success"){
+                // tr.remove().draw();;
                 await getData();
                 successToast(res.data["message"])
             }else{

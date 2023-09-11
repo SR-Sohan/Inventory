@@ -97,8 +97,6 @@
         errorToast("Quantity is required")
       }else if(unit === ""){
         errorToast("Unit is required")
-      }else if(!image){
-        errorToast("Image is required")
       }else{
 
         let formData = new FormData();
@@ -116,7 +114,7 @@
                     "Content-Type": "multipart/form-data", 
                 },
             }
-          console.log(image);
+         
         showLoader();
         let res = await axios.post("/dashboard/product-create-update",formData,config)
         hideLoader();
