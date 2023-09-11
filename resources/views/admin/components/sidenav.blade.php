@@ -20,6 +20,10 @@
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-bag-shopping"></i></div>
                     Product
                 </a>
+                <a class="nav-link" href="{{url("/dashboard/sales")}}">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-dollar-sign"></i></div>
+                    Sales
+                </a>
                 <a class="nav-link" href="{{url("/dashboard/invoice")}}">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-receipt"></i></div>
                     Invoice

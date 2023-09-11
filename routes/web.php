@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\UserController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,7 @@ Route::prefix("/dashboard")->middleware("tokenVerify")->group(function(){
     Route::get("category",[CategoryController::class,"page"]);
     Route::get("profile",[UserController::class,"profilePage"]);
     Route::get("product",[ProductController::class,"page"]);
+    Route::get("sales",[InvoiceController::class,"salePage"]);
 
     //Customer Api
     Route::get("customer-list",[CustomerController::class,"customerList"]);

@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
 {
+
+    public function salePage(){
+        return view("admin.pages.sale");
+    }
     
 
     public function invoiceCreate(Request $request){
