@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::prefix("/dashboard")->middleware("tokenVerify")->group(function(){
     Route::get("product",[ProductController::class,"page"]);
     Route::get("sales",[InvoiceController::class,"salePage"]);
     Route::get("invoice",[InvoiceController::class,"invoicePage"]);
+    Route::get("report",[ReportController::class,"reportPage"]);
 
 
     // Dashboard api
@@ -54,6 +56,12 @@ Route::prefix("/dashboard")->middleware("tokenVerify")->group(function(){
     Route::get("invoice-select",[InvoiceController::class,"invoiceSelect"]);
     Route::post("invoice-delete",[InvoiceController::class,"invoiceDelete"]);
     Route::post("invoice-details",[InvoiceController::class,"invoiceDetails"]);
+
+
+    // Report Api
+    Route::get("sales-report/{fromDate}/{toDate}",[ReportController::class,"reportCreate"]);
+
+    
 
 });
 
