@@ -25,6 +25,7 @@ Route::prefix("/dashboard")->middleware("tokenVerify")->group(function(){
     Route::get("profile",[UserController::class,"profilePage"]);
     Route::get("product",[ProductController::class,"page"]);
     Route::get("sales",[InvoiceController::class,"salePage"]);
+    Route::get("invoice",[InvoiceController::class,"invoicePage"]);
 
     //Customer Api
     Route::get("customer-list",[CustomerController::class,"customerList"]);
@@ -43,6 +44,9 @@ Route::prefix("/dashboard")->middleware("tokenVerify")->group(function(){
     Route::get("product-by-id/{id}",[ProductController::class,"productById"]);
     Route::post("product-create-update",[ProductController::class,"productCreateUpdate"]);
     Route::post("product-delete",[ProductController::class,"productDelete"]);
+
+    // Invoice Api
+    Route::post("invoice-create",[InvoiceController::class,"invoiceCreate"]);
 
 });
 

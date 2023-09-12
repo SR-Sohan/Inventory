@@ -38,15 +38,15 @@
 
                 <div class="invoice_footer">
                     <div class="invoice_bill">
-                        <p><strong>Total: $</strong><span id="total">566</span></p>
-                        <p><strong>Payable: $</strong><span id="payAble">566</span></p>
-                        <p><strong>Vat(5%): $</strong><span id="vat">5</span></p>
-                        <p><strong>Discount: $</strong><span id="discount">5</span></p>
+                        <p><strong>Total: $</strong><span id="total"></span></p>
+                        <p><strong>Payable: $</strong><span id="payAble"></span></p>
+                        <p><strong>Vat(5%): $</strong><span id="vat"></span></p>
+                        <p><strong>Discount: $</strong><span id="discount"></span></p>
                         <div>
                             <label for="discountP">Discount(%)</label>
-                            <input class="form-control" type="number" name="discountP" id="discountP">
+                            <input onchange="discountChange()" class="form-control" type="number" name="discountP" id="discountP">
                         </div>
-                        <button class="btn btn-sm btn-outline-success mt-2"> <i class="fa-solid fa-floppy-disk"></i> Save</button>
+                        <button onclick="saveInvoice()" class="btn btn-sm btn-outline-success mt-2"> <i class="fa-solid fa-floppy-disk"></i> Save</button>
                     </div>
                 </div>
 
@@ -145,6 +145,44 @@
             return dmyString;
         }
 
+        
+
+        // Calculate Total
+        function totalCalculate(){
+            let total = 0;
+            let payable = 0;
+            let vat = 0;
+            let discount = 0;
+
+            let discountParcent = parseFloat($("#discountP").val())
+
+            products.forEach((item,index) =>{
+              
+                total = total + parseFloat(item["sale_price"])
+            })
+
+            if(!discountParcent){
+                vat = ((total * 5)/100).toFixed(2)
+            }else{
+                discount = ((total * discountParcent)/100).toFixed(2)
+                total = (total - (total * discountParcent)/100).toFixed(2)
+                vat = ((total * 5)/100).toFixed(2)
+            }
+
+            payable = (parseFloat(total) + parseFloat(vat)).toFixed(2)
+
+            $("#total").text(total)
+            $("#payAble").text(payable)
+            $("#vat").text(vat)
+            $("#discount").text(discount)
+
+        }
+
+        // DiscountChange
+        function discountChange(){
+            totalCalculate()
+        }
+
         // Show invoice product
         function showProduct(){
            let invoiceList = $("#invoiceList");
@@ -160,6 +198,8 @@
                             </tr>`
                             invoiceList.append(row)
            });
+
+           totalCalculate();
         }
 
 
@@ -281,6 +321,43 @@
             products.splice(index,1);
             showProduct();
         })
+
+        // Save Invoice
+
+        async function saveInvoice(){
+            let total = $("#total").text()
+            let vat = $("#vat").text()
+            let payable = $("#payAble").text()
+            let discount = $("#discount").text()
+            let customerId = customerInfo.id
+        
+            let data = {
+                "customer_id" : customerId,
+                "total" : total,
+                "vat" : vat,
+                "discount" : discount,
+                "payable" : payable,
+                "products" : products
+            }
+
+            if(!customerId){
+                errorToast("Please Add Customer")
+            }else if(products.length === 0){
+                errorToast("Please Add Product")
+            }else{
+                showLoader();
+                let res = await axios.post("/dashboard/invoice-create",data)
+                hideLoader();
+
+                if(res.status === 200){
+                    successToast("Invoice Create Successfully")
+                }else{
+                    errorToast("Something is wrong")
+                }
+            }
+        }
+
+
     </script>
 
    

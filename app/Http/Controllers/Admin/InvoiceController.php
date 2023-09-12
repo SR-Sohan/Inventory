@@ -15,6 +15,10 @@ class InvoiceController extends Controller
     public function salePage(){
         return view("admin.pages.sale");
     }
+
+    public function invoicePage(){
+        return view("admin.pages.invoice");
+    }
     
 
     public function invoiceCreate(Request $request){
@@ -47,7 +51,7 @@ class InvoiceController extends Controller
                 Invoice_product::create([
                     "invoice_id" => $invoiceId,
                     "user_id" => $userID,
-                    "product_id" => $product["product_id"],
+                    "product_id" => $product["id"],
                     "qty" => $product["qty"],
                     "sale_price" => $product["sale_price"],    
                 ]);
