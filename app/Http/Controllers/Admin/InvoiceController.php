@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Invoice_product;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -55,6 +56,13 @@ class InvoiceController extends Controller
                     "qty" => $product["qty"],
                     "sale_price" => $product["sale_price"],    
                 ]);
+
+                
+                // Decrement the product quantity
+                $productModel = Product::find($product["id"]);
+                if ($productModel) {
+                    $productModel->decrement('quantity',$product["qty"]);
+                }
             }
 
             DB::commit();
