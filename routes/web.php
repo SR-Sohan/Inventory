@@ -27,6 +27,10 @@ Route::prefix("/dashboard")->middleware("tokenVerify")->group(function(){
     Route::get("sales",[InvoiceController::class,"salePage"]);
     Route::get("invoice",[InvoiceController::class,"invoicePage"]);
 
+
+    // Dashboard api
+    Route::get("summary",[DashboardController::class,"summary"]);
+
     //Customer Api
     Route::get("customer-list",[CustomerController::class,"customerList"]);
     Route::get("customer-by-id/{id}",[CustomerController::class,"customerByID"]);
