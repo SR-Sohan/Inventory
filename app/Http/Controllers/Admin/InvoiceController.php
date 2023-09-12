@@ -72,7 +72,7 @@ class InvoiceController extends Controller
     public function invoiceSelect(Request $request){
         $userID = $request->header("userID");
 
-        return Invoice::where("user_id","=",$userID)->with("customer")->get();
+        return Invoice::where("user_id","=",$userID)->with("customer")->orderBy("id","desc")->get();
     }
 
     public function invoiceDetails(Request $request){
@@ -84,7 +84,7 @@ class InvoiceController extends Controller
 
         $customerDetails = Customer::where("id","=",$customerId)->where("user_id","=",$userID)->first();
         $invoiceTotal = Invoice::where("id","=",$invoiceId)->where("user_id","=",$userID)->first();
-        $invoiceProducts = Invoice_product::where("id","=",$invoiceId)->where("user_id","=",$userID)->get();
+        $invoiceProducts = Invoice_product::where("invoice_id","=",$invoiceId)->where("user_id","=",$userID)->with("product")->get();
 
 
         return array(

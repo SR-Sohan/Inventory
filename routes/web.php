@@ -47,6 +47,9 @@ Route::prefix("/dashboard")->middleware("tokenVerify")->group(function(){
 
     // Invoice Api
     Route::post("invoice-create",[InvoiceController::class,"invoiceCreate"]);
+    Route::get("invoice-select",[InvoiceController::class,"invoiceSelect"]);
+    Route::post("invoice-delete",[InvoiceController::class,"invoiceDelete"]);
+    Route::post("invoice-details",[InvoiceController::class,"invoiceDetails"]);
 
 });
 

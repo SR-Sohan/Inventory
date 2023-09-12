@@ -351,6 +351,8 @@
 
                 if(res.status === 200){
                     successToast("Invoice Create Successfully")
+
+                    window.location.href = "/dashboard/invoice"
                 }else{
                     errorToast("Something is wrong")
                 }

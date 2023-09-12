@@ -16,4 +16,9 @@ class Invoice_product extends Model
         "qty",
         "sale_price"
     ];
+
+    
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
 }
