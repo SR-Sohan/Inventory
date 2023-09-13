@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,6 +17,7 @@ Route::get("/register",[UserController::class,"RegisterPage"]);
 Route::get("/forgot-password",[UserController::class,"ForgotPage"]);
 Route::get("/otp",[UserController::class,"OTPPage"]);
 Route::get("/reset-password",[UserController::class,"ResetPage"])->middleware("tokenVerify");
+Route::get("/",[HomeController::class,"homePage"]);
 
 Route::prefix("/dashboard")->middleware("tokenVerify")->group(function(){
 
