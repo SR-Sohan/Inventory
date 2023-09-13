@@ -76,7 +76,7 @@
                 @forelse ($list as $item)
                 <tr>
                     <td>{{$item->customer->name}}</td>
-                    <td>{{$item->customer->phone}}</td>
+                    <td>{{$item->customer->mobile}}</td>
                     <td>${{$item->total}}</td>
                     <td>${{$item->discount}}</td>
                     <td>${{$item->vat}}</td>
