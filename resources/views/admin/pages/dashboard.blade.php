@@ -3,25 +3,25 @@
     <div class="row g-3 mt-3">
         <h2>Today Summary</h2>
         <div class="col-lg-3">
-            <div class="bg-success text-center text-white p-4">
+            <div class="bg-secondary text-center text-white p-4">
                 <h4>Today Sales</h4>
                 <h2>$<span id="todaySale">0</span></h2>
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="bg-success text-center text-white p-4">
+            <div class="bg-danger text-center text-white p-4">
                 <h4>Today Invoice</h4>
                 <h2><span id="todayInvoice">0</span></h2>
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="bg-success text-center text-white p-4">
+            <div class="bg-info text-center text-white p-4">
                 <h4>New Products</h4>
                 <h2><span id="todayProduct">0</span></h2>
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="bg-success text-center text-white p-4">
+            <div class="bg-warning text-center text-white p-4">
                 <h4>New Customer</h4>
                 <h2><span id="todayCustomer">0</span></h2>
             </div>
@@ -31,25 +31,25 @@
     <div  class="row g-3 mt-5 border-top  border-danger">
         <h2>Total Summary</h2>
         <div class="col-lg-3">
-            <div class="bg-danger text-center text-white p-4">
+            <div class="bg-dark text-center text-white p-4">
                 <h4>Total Products</h4>
                 <h2><span id="totalProduct">423</span></h2>
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="bg-danger text-center text-white p-4">
+            <div class="bg-warning text-center text-white p-4">
                 <h4>Total Category</h4>
                 <h2><span id="totalCategory">423</span></h2>
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="bg-danger text-center text-white p-4">
+            <div class="bg-primary text-center text-white p-4">
                 <h4>Total Customer</h4>
                 <h2><span id="totalCustomer">423</span></h2>
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="bg-danger text-center text-white p-4">
+            <div class="bg-info text-center text-white p-4">
                 <h4>Total Invoice</h4>
                 <h2><span id="totalInvoice">423</span></h2>
             </div>
@@ -61,13 +61,13 @@
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="bg-success text-center text-white p-4">
+            <div class="bg-secondary text-center text-white p-4">
                 <h4>Total Vat</h4>
                 <h2>$<span id="totalVat"></span></h2>
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="bg-success text-center text-white p-4">
+            <div class="bg-danger text-center text-white p-4">
                 <h4>Total Collection</h4>
                 <h2>$<span id="totalPayable"></span></h2>
             </div>
