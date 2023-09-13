@@ -34,7 +34,7 @@ class DashboardController extends Controller
         $totalPayable = Invoice::where("user_id","=",$userID)->sum("payable");
 
         return array(
-            "todaySale" => $todaySale,
+            "todaySale" => round($todaySale,2),
             "todayProduct" => $todayProduct,
             "todayInvoice" => $todayInvoice,
             "todayCustomer" => $todayCustomer,
