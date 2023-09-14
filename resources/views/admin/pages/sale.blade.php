@@ -323,7 +323,6 @@
         })
 
         // Save Invoice
-
         async function saveInvoice(){
             let total = $("#total").text()
             let vat = $("#vat").text()

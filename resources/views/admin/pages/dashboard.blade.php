@@ -1,5 +1,9 @@
 @extends('layouts.layout')
 @section('admin_content')
+
+    <div class="my-5">
+        <canvas id="myChart"></canvas>
+    </div>
     <div class="row g-3 mt-3">
         <h2>Today Summary</h2>
         <div class="col-lg-3">
@@ -76,6 +80,7 @@
 
 
     <script>
+        // Get Summary
         getSummary()
         async function  getSummary() {
             showLoader();
@@ -100,5 +105,36 @@
                 errorToast("Something is worning")
             }
         }
+
+        // config Chart
+        const salesData = [50, 45, 60, 70, 55, 75, 80, 90, 85, 70, 65, 60, 75, 80, 85, 90, 95, 100, 110, 120, 130, 140, 50, 160, 170, 180, 190, 200, 210, 220];
+
+        const daysInMonth = Array.from({ length: 31 }, (_, i) => i + 1); 
+
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: daysInMonth.map(day => `Day ${day}`),
+                datasets: [{
+                    label: 'Sales',
+                    data: salesData.slice(0, 31), // Slice the sales data for 31 days
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false, // Hide the legend if you don't need it
+                    }
+                }
+            }
+        });
+
     </script>
 @endsection
